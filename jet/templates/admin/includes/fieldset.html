@@ -17,7 +17,6 @@
                         {% if field.is_readonly %}
                             <p>{{ field.contents }}</p>
                         {% else %}
-                            <p>Campo</p>
                             {{ field.field|jet_select2_lookups }}
                         {% endif %}
                     {% endif %}

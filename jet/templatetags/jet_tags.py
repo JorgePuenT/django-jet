@@ -80,20 +80,7 @@ def jet_select2_lookups(field):
 
             initial_value = field.value()
 
-            if hasattr(field, 'field') and isinstance(field.field, ModelMultipleChoiceField):
-                if initial_value:
-                    initial_objects = model.objects.filter(pk__in=initial_value)
-                    choices.extend(
-                        [(initial_object.pk, get_model_instance_label(initial_object))
-                            for initial_object in initial_objects]
-                    )
-
-                if isinstance(field.field.widget, RelatedFieldWidgetWrapper):
-                    field.field.widget.widget = SelectMultiple(attrs)
-                else:
-                    field.field.widget = SelectMultiple(attrs)
-                field.field.choices = choices
-            elif hasattr(field, 'field') and isinstance(field.field, ModelChoiceField):
+            if hasattr(field, 'field') and isinstance(field.field, ModelChoiceField):
                 if initial_value:
                     try:
                         initial_object = model.objects.get(pk=initial_value)
